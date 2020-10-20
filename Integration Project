@@ -1,0 +1,106 @@
+#Logan Devore
+#COP 1500
+#integration Project
+# A program to determine whether or not you need to get tested for COVID-19
+#9/16/2020
+
+
+
+                                                                                               #Version 1.1
+
+riskfactor = 0  # This sets the risk factor to 0 so I can add and subtract from it
+
+print("Hello and welcome to my COVID-19 questionaaire.")
+print("Please type:")
+print("Yes or No to answer the questions")
+print("and Exit to exit the program (currently not working)")   # GET THIS WORKING
+
+#Testing question
+validAnswer = True
+while validAnswer:
+    print("Have you been tested for COVID-19 yet?")
+    tested = input()
+    if tested == 'Yes' or 'yes':
+        print("Thank you, Onto the next question.")
+        validAnswer = False
+    elif tested == 'No' or 'no':
+        print("thank you, Onto the next question.")
+        validAnswer = False
+
+    else:
+        print("Please type 1 or 2")
+        validAnswer = True
+
+
+#Location question
+location = input("Where are you located in florida? EX: Lehigh, FT Myers, Naples, or Estero.")
+if location == "Lehigh" or "Lehigh Acres" or "lehigh acres":
+    print("Thank you for your answer.")
+elif location == "FT Myers" or "Fort Myers" or "Fort myers":
+    print("So you're local?")
+elif location == "Naples" or "naples":
+    print("Thank you for your input, you live in" + location)
+elif location == "Estero" or "estero":
+    print("Thank you for your input.")
+else:
+    print("Please answer the question.")
+
+# Have you been around any COVID positive persons
+covidpeople = input("Have you been around any COVID-19 positive people?")
+if covidpeople == 'Yes' or 'yes':
+    riskfactor += 3  #This adds 3 to the risk factor
+    print("Yikes, Hope you've been wearing a mask.")
+elif covidpeople == 'No' or 'no':
+    riskfactor -= 1  #This takes 1 point off on the risk factor
+    print("Good job keeping distance.")
+else:
+    print("Please answer the question.")
+
+#Mask question
+mask = input("Have you been wearing a mask out in public recently?")
+if mask == 'Yes' or 'yes':
+    riskfactor /= 2  #This divides the risk factor by 2
+    print("Good, onto the next question")
+elif mask == 'No' or 'no':
+    riskfactor += 2  #This adds 2 points to my riskfactor
+    print("You really should wear a mask out in public.")
+else:
+    print("Please answer the question.")
+
+
+#Cough
+cough = input("Do you currently have a cough? Yes or No.")
+if cough == 'Yes' or 'yes':
+    riskfactor += 3  #This adds 3 points to my risk factor variable
+    print("Thank you for your response.")
+elif cough == 'No' or 'no':
+    riskfactor -= 1
+    print("Thank you for your response.")
+else:
+    print("Please answer the question.")
+
+#results
+print("your risk for COVID-19 is:", riskfactor, "/10")
+
+
+#Feaver
+temp = 98.6
+Feaver = 100.6
+feaver = input("Do you have a fever? Please type Yes or No.")
+if feaver == 'Yes' or 'yes':
+    print("wht is your current temperature?")
+elif feaver == 'no' or 'No':
+    print('Thank you for your responce.')
+else:
+    print("Please answer the question")
+
+
+if temp < 1 or temp > 110:
+    print("Invalid, please type a valid temperature.")
+if temp >= 98.6 and temp <= 100.6:
+    print("thank you for your responce.")
+elif temp >= 100.6:
+    print("You seem to have a feaver, Please proceed to the next question.")
+else:
+    print("Please answer the question with a temperature.")
+
