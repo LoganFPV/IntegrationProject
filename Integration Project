@@ -1,38 +1,55 @@
-#Logan Devore
-#COP 1500
-#integration Project
+# Logan Devore
+# COP 1500
+# integration Project
 # A program to determine whether or not you need to get tested for COVID-19
-#9/16/2020
+# 10/23/2020
 
 
-
-                                                                                               #Version 1.1
+# Version 1.3
 
 riskfactor = 0  # This sets the risk factor to 0 so I can add and subtract from it
-
-print("Hello and welcome to my COVID-19 questionaaire.")
+print('Hello user, please enter your name.')
+def great(name):
+    name = input()
+    print("Hello", name, "welcome to my Covid-19 questionaaire")
+great('name')
 print("Please type:")
 print("Yes or No to answer the questions")
-print("and Exit to exit the program (currently not working)")   # GET THIS WORKING
+print("and Exit to exit the program, currently not working)")  # GET THIS WORKING
 
-#Testing question
-validAnswer = True
-while validAnswer:
+# Testing question
+validAnswer = False
+while not validAnswer:
     print("Have you been tested for COVID-19 yet?")
     tested = input()
     if tested == 'Yes' or 'yes':
-        print("Thank you, Onto the next question.")
-        validAnswer = False
+        results = input("did you get your results back?")
+        if results == 'yes' or 'Yes':
+            print('Were they Positive or Negative?')
+            results_back = input()
+            if results_back == "positive" or 'positive':
+                print("Please quarantine yourself or as requested per doctor's orders.")
+                riskfactor += 5
+            elif results_back == 'Negative' or 'negative':
+                print("Good job at staying 6 feet apart from people.")
+                riskfactor -= 5
+            else:
+                print("Please type Positive or Negative to answer the question.")
+        elif results == 'No' or 'no':
+            print("please stay indoors until your results get to you.")
+        print("Onto the next question.")
+        validAnswer = True
     elif tested == 'No' or 'no':
         print("thank you, Onto the next question.")
+        print("Although it might be wise to go get tested,\n"
+              "You might want to consider quarenteening yourselfn\n "
+              "to make it harder for you to contract COVID")
+        validAnswer = True
+    else:
+        print("Please type Yes or No")
         validAnswer = False
 
-    else:
-        print("Please type 1 or 2")
-        validAnswer = True
-
-
-#Location question
+# Location question
 location = input("Where are you located in florida? EX: Lehigh, FT Myers, Naples, or Estero.")
 if location == "Lehigh" or "Lehigh Acres" or "lehigh acres":
     print("Thank you for your answer.")
@@ -48,30 +65,52 @@ else:
 # Have you been around any COVID positive persons
 covidpeople = input("Have you been around any COVID-19 positive people?")
 if covidpeople == 'Yes' or 'yes':
-    riskfactor += 3  #This adds 3 to the risk factor
+    riskfactor += 3  # This adds 3 to the risk factor
     print("Yikes, Hope you've been wearing a mask.")
+    distance = input('Have you been staying 6 feet apart from other people?')
+    if distance == "Yes" or "yes":
+        print("Good job at keeping distance")
+        riskfactor -= 3
+    elif distance == "No" or "no":
+        print("You might want to consider keeping\n "
+              "distance from people")
+        riskfactor += 3
+    else:
+        print("Please type Yes or No")
 elif covidpeople == 'No' or 'no':
-    riskfactor -= 1  #This takes 1 point off on the risk factor
+    riskfactor -= 1  # This takes 1 point off on the risk factor
     print("Good job keeping distance.")
 else:
     print("Please answer the question.")
 
-#Mask question
+# Mask question
 mask = input("Have you been wearing a mask out in public recently?")
 if mask == 'Yes' or 'yes':
-    riskfactor /= 2  #This divides the risk factor by 2
-    print("Good, onto the next question")
+    cdc_mask = input("Is your mask CDC verified")
+    if cdc_mask == "yes" or "yes":
+        print("Good job at taking the proper precautions.")
+    elif cdc_mask == "No" or "no":
+        print("You might want to consider purchasing a CDC verified mask.")
+        print("Good, onto the next question")
+    riskfactor /= 2  # This divides the risk factor by 2
 elif mask == 'No' or 'no':
-    riskfactor += 2  #This adds 2 points to my riskfactor
     print("You really should wear a mask out in public.")
+    riskfactor += 2  # This adds 2 points to my riskfactor
 else:
     print("Please answer the question.")
 
-
-#Cough
+# Cough
 cough = input("Do you currently have a cough? Yes or No.")
 if cough == 'Yes' or 'yes':
-    riskfactor += 3  #This adds 3 points to my risk factor variable
+    bad_cough = input("Is the cough from your lungs?")
+    if bad_cough == "yes" or "yes":
+        print("That's not good you should probably consider getting teted \n"
+              "if you haven't done so already.")
+        riskfactor += 3
+    elif bad_cough == "No" or "no":
+        print("You might still want to get tested but it doesn't \n"
+              "sound too bad.")
+        riskfactor -= 1
     print("Thank you for your response.")
 elif cough == 'No' or 'no':
     riskfactor -= 1
@@ -79,28 +118,26 @@ elif cough == 'No' or 'no':
 else:
     print("Please answer the question.")
 
-#results
-print("your risk for COVID-19 is:", riskfactor, "/10")
-
-
-#Feaver
-temp = 98.6
+# Feaver
 Feaver = 100.6
-feaver = input("Do you have a fever? Please type Yes or No.")
-if feaver == 'Yes' or 'yes':
-    print("wht is your current temperature?")
-elif feaver == 'no' or 'No':
-    print('Thank you for your responce.')
+invalid_temp = range(0,96)
+currenttemp = float(input("Please Enter your current temperature, Round to the nearest whole number."))
+currenttemp != invalid_temp
+if currenttemp == 'Yes' or 'yes':
+    if 95 >= currenttemp >= 110:
+        print("Invalid, please type a valid temperature")
+        riskfactor += 0
+    if 97.3 <= currenttemp <= 100.6:
+        print("Thank you for your responce. Your current temperature is:", currenttemp)
+        riskfactor += 2
+    if 100.6 <= currenttemp <= 104.0:
+        print("You might want to consider getting tested for Covid-19. Your current temperature is:", currenttemp)
+        riskfactor += 3
+    if 104.0 <= currenttemp <= 110:
+        print("Seek medical attention now!")
+        riskfactor += 4
 else:
     print("Please answer the question")
 
-
-if temp < 1 or temp > 110:
-    print("Invalid, please type a valid temperature.")
-if temp >= 98.6 and temp <= 100.6:
-    print("thank you for your responce.")
-elif temp >= 100.6:
-    print("You seem to have a feaver, Please proceed to the next question.")
-else:
-    print("Please answer the question with a temperature.")
-
+# results
+print("your risk for COVID-19 is:", riskfactor, "/10")
